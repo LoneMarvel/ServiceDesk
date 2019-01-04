@@ -1,0 +1,28 @@
+.rounded {
+     border-radius:0.4rem!important;
+ }
+ .frmRounded {
+      border-radius:0.6rem!important;
+  }
+ .btn-href {
+     border-radius: 30px;
+ }
+ .btn-href:hover {
+   font-weight: normal;
+ }
+ a {
+   color: #4E4E4E;
+   font-weight: bold;
+ }
+ a:hover {
+   color: #4E4E4E;
+   font-weight: bold;
+   text-decoration: none;
+ }
+ .form-group.required .control-label:after {
+  color: #d00;
+  content: "*";
+  position: absolute;
+  margin-left: 8px;
+  top:7px;
+}

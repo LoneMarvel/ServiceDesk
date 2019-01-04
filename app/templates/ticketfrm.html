@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %}KnowHow Ticket Form{% endblock %}
+{% block navTitle %}KnowHow Service Desk Web Service Φόρμα Νέου Συμβάτος{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Φόρμα Εισαγωγή Νέου Συμβάτος</strong></h5>
+        <form method="POST" role="form">
+          {{ ticketForm.csrf_token }}
+          <div class="row">
+            <div class="col-lg form-group required"><label for="ticketTitle" class="control-label">{{ ticketForm.ticketTitle.label }}</label>
+              <input type="text" class="form-control frmRounded" name="ticketTitle" id="ticketTitle" placeholder="Τίτλος">
+                {% for error in ticketForm.ticketTitle.errors %}
+                  <div class="alert alert-warning" role="alert">{{ error }}</div>
+                {% endfor %}
+            </div>
+          </div>
+        <div class="row">
+          <div class="col-lg form-group"><label for="ticketCat" class="control-label">Κατηγορία</label>
+            <select class="form-control frmRounded">
+            {% for value in ticketForm.ticketCat %}
+              <option id="ticketCat" name="ticketCat" value="{{ value.id }}">{{ value.cat_name }}</option>
+            {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg form-group"><label for="ticketDescr" class="control-label">{{ ticketForm.ticketDescr.label }}</label>
+            <textarea class="form-control frmRounded" id="ticketDescr" name="ticketDescr"></textarea>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

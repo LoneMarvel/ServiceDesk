@@ -7,7 +7,8 @@
   <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/icon" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-  <title>{{ mainTitle }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
   <nav class="shadow navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,24 +19,24 @@
         <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="/customer">Πελάτες</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link 2</a>
+        <a class="nav-link" href="/ticket">Συμβάντα</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Link 3</a>
       </li>
     </ul>
-    <span class="navbar-text mr-auto"><p class="text-center"><h3><strong>KnowHow Service Desk Web Service</strong></h3></p></span>
+    <span class="navbar-text mr-auto"><p class="text-center"><h3><strong>{% block navTitle %}{% endblock %}</strong></h3></p></span>
     <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-light btn-outline my-2 my-sm-0" type="submit">Search</button>
+      <input class="form-control mr-sm-2 frmRounded" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-light btn-outline my-2 my-sm-0 btn-href" type="submit">Search</button>
     </form>
   </div>
   </nav>
   <br />
-  <div class="container">
+  <div class="container-fluid">
     {% block content %}{% endblock %}
   </div>
   <footer class="page-footer bg-dark font-small stylish-color-dark pt-4 fixed-bottom">

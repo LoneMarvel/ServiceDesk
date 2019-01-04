@@ -1,11 +1,14 @@
 {% extends 'layout.html' %}
+{% block title %}KnowHow ServiceDesk DashBoard{% endblock %}
+{% block navTitle %}Κεντρική Σελίδα KnowHow Service Desk Web Service{% endblock %}
 
 {% block content %}
 <div class="row">
-  <div class="col-lg">
-    <div class="card shadow" style="width: 70rem;">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
       <div class="card-body"><h5 class="card-title"><strong>Ανοιχτά Συμβάντα</strong></h5>
-    <!-- Incendents List Goes Here -->
+    <!-- Incindents List Goes Here -->
         <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
@@ -21,11 +24,11 @@
             {% for item in allIncidents %}
               <tr>
                 <th scope="row">{{ item.id }}</th>
-                <td>{{ item.title }}</td>
-                <td>{{ item.category }}</td>
-                <td>{{ item.customer }}</td>
+                <td><a href="{{ url_for('EditTicket', id=item.id) }}">{{ item.title }}</a></td>
+                <td>{{ item.category.cat_name }}</td>
+                <td>{{ item.customers[0].lastname }}, {{ item.customers[0].firstname }}</td>
                 <td>{{ item.start_date.strftime('%d/%m/%Y-%H:%M') }}</td>
-                <td><a class="btn btn-sm btn-outline btn-dark" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Edit</a></td>
+                <td><a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Edit</a></td>
               </tr>
             {% endfor %}
           </tbody>

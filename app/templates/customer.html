@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+{% block title %}KnowHow Service Desk Search Customer{% endblock %}
+
+{% block navTitle %}KnowHow Service Desk Web Service Αναζήτηση Πελάτη{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Φόρμα Αναζήτησης Πελάτη</strong></h5>
+        <form method="POST" role="form">
+          {{ seekCustForm.csrf_token }}
+          <div class="row">
+            <div class="col-lg form-group"><label for="mobilePhone" class="control-label">{{ seekCustForm.mobilePhone.label }}</label>
+              <input type="text" class="form-control frmRounded" name="mobilePhone" id="mobilePhone" placeholder="Αριθμός Κινητού">
+            </div>
+            <div class="col-lg form-group"><label for="lastname" class="control-label">{{ seekCustForm.lastName.label }}</label>
+              <input type="text" class="form-control frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-lg">
+              <input type="submit" class="btn btn-dark btn-href" value="Αναζήτηση" name="submit">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Αποτελέσματα Αναζήτησης</strong></h5>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Address</th>
+              <th scope="col">Mobile Phone</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          {% if noResult %}
+          <h5>{{ noResult }}</h5>
+          {% else %}
+          {% for item in seekQuery %}
+          <tr>
+            <th scope="row">{{ item.id }}</th>
+            <td>{{ item.firstname }}</td>
+            <td>{{ item.lastname }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.mobile }}</td>
+            <td><i class="fas fa-edit"></i> Edit</td>
+          </tr>
+        {% endfor %}
+        {% endif %}
+        </table>
+        <a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addcustomer') }}"><i class="fas fa-plus"></i> Προσθήκη Πελάτη</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

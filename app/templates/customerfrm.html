@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+{% block title %}KnowHow Customer Form{% endblock %}
+{% block navTitle %}KnowHow Service Desk Web Service Φόρμα Νέου Πελάτη{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Φόρμα Εισαγωγή Νέου Πελάτη</strong></h5>
+        <form method="POST" role="form">
+          {{ custForm.csrf_token }}
+          <div class="row">
+            <div class="col-lg form-group required"><label for="firstname" class="control-label">{{ custForm.firstName.label }}</label>
+              <input type="text" class="form-control frmRounded" name="firstName" id="firstName" placeholder="Ονομα">
+                {% for error in custForm.firstName.errors %}
+                  <div class="alert alert-warning" role="alert">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="col-lg form-group required"><label for="lastname" class="control-label">{{ custForm.lastName.label }}</label>
+              <input type="text" class="form-control frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+              {% for error in custForm.lastName.errors %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"><label for="address">{{ custForm.address.label }}</label>
+              <input type="text" class="form-control frmRounded" name="address" id="address" placeholder="Διεύθυνση">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"><label for="phone">{{ custForm.phone.label }}</label>
+              <input type="text" class="form-control frmRounded" name="phone" id="phone" placeholder="Τηλέφωνο">
+            </div>
+            <div class="col form-group required"><label for="mobilePhone" class="control-label">{{ custForm.mobilePhone.label }}</label>
+              <input type="text" class="form-control frmRounded" id="name" placeholder="Κινητό">
+              {% for error in custForm.mobilePhone.errors %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"><label for="workPhone">{{ custForm.workPhone.label }}</label>
+              <input type="text" class="form-control frmRounded" name="workPhone" id="workPhone" placeholder="Τηλέφωνο Εργασίας">
+            </div>
+            <div class="col"><label for="faxPhone">{{ custForm.faxPhone.label }}</label>
+              <input type="text" class="form-control frmRounded" name="faxPhone" id="faxPhone" placeholder="FAX">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg form-group required"><label for="email" class="control-label">{{ custForm.email.label }}</label>
+              <input type="text" class="form-control frmRounded" name="email" id="email" placeholder="Email">
+              {% for error in custForm.email.errors %}
+                <div class="alert alert-warning" role="alert">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg"><label for="details">{{ custForm.details.label }}</label>
+              <textarea class="form-control frmRounded" name="details" id="details"></textarea>
+            </div>
+          </div>
+          <br />
+          <div class="row">
+            <div class="col-lg">
+              <input type="submit" class="btn btn-dark btn-href" value="Αποθήκευση" name="submit">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
