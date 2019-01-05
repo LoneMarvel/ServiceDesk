@@ -16,27 +16,16 @@ def EditTicket(id):
 
 @app.route('/customer', methods=['GET', 'POST'])
 def customer():
-    seekFlag = 0
-    seekQuery = ''
     noResult = ''
     seekCustForm = SeekCustomerForm()
     if seekCustForm.validate_on_submit():
-        print('Form Validated')
         seekName = seekCustForm.lastName.data
         seekMobile = seekCustForm.mobilePhone.data
         if seekName != '':
-            seekFlag = 1
-            print(f'Name Is -> {seekName}')
-        if seekMobile != '':
-            seekFlag += 2
-            print(f'Mobile Is -> {seekMobile}')
-        if seekFlag == 1:
-            print(seekName+'%')
             seekQuery = Customer.query.filter(Customer.lastname.like('%'+seekName+'%')).all()
-        if seekFlag == 2:
+        if seekMobile != '':
             seekQuery = Customer.query.filter(Customer.mobile.like('%'+seekMobile+'%')).all()
-            print('Passed From Flag -> 2')
-        if seekFlag == 0:
+        if  seekName == '' and seekMobile == '':
             seekQuery = Customer.query.all()
         if not seekQuery:
             noResult='No Results Found'
