@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+{% block title %}KnowHow Service Desk Search Ticket{% endblock %}
+
+{% block navTitle %}KnowHow Service Desk Web Service Αναζήτηση Πελάτη{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Φόρμα Αναζήτησης Συμβάντος</strong></h5>
+        <form method="POST" role="form">
+          {{ seekTicketForm.csrf_token }}
+          <div class="row">
+            <div class="col-lg form-group"><label for="ticketTitle" class="control-label">{{ seekTicketForm.ticketTitle.label }}</label>
+              <input type="text" class="form-control form-control-sm frmRounded" name="ticketTitle" id="ticketTitle" placeholder="Τίτλος Συμβάτος">
+            </div>
+            <div class="col-lg form-group"><label for="serviceTag" class="control-label">{{ seekTicketForm.serviceTag.label }}</label>
+              <input type="text" class="form-control form-control-sm frmRounded" name="serviceTag" id="serviceTag" placeholder="Service Tag">
+            </div>
+            <div class="col-lg form-group"><label for="ticketTitle" class="control-label">{{ seekTicketForm.ticketCat.label }}</label>
+              {{ seekTicketForm.ticketCat(class_='form-control form-control-sm frmRounded') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg form-group"><label for="mobilePhone" class="control-label">{{ seekTicketForm.mobilePhone.label }}</label>
+              <input type="text" class="form-control form-control-sm frmRounded" name="mobilePhone" id="mobilePhone" placeholder="Αριθμός Κινητού">
+            </div>
+            <div class="col-lg form-group"><label for="lastname" class="control-label">{{ seekTicketForm.lastName.label }}</label>
+              <input type="text" class="form-control form-control-sm frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <input type="submit" class="btn btn-dark btn-href" value="Αναζήτηση" name="submit">
+            </div>
+          </div>
+          <br />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="card shadow rounded">
+      <div class="card-body"><h5 class="card-title"><strong>Αποτελέσματα Αναζήτησης</strong></h5>
+        <table class="table table-sm table-hover table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Τίτλος Συμβάντος</th>
+              <th scope="col">Ονομα Πελάτη</th>
+              <th scope="col">Κατηγορία</th>
+              <th scope="col">Κιν. Τηλέφωνο</th>
+              <th scope="col">Ενέργεια</th>
+            </tr>
+          </thead>
+          {% if noResult %}
+          <h5>{{ noResult }}</h5>
+          {% else %}
+          {% set rowCount = namespace(r=1) %}
+          {% for item in seekQuery %}
+          <tr>
+            <th scope="row">{{ rowCount.r }}</th>
+            <td>{{ item.title }}</td>
+            <td>{{ item.lastname }}, {{ item.firstname }}</td>
+            <td>{{ item.cat_name }}</td>
+            <td>{{ item.mobile }}</td>
+            <td><a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Επεξεργασία</a></td>
+          </tr>
+          {% set rowCount.r = rowCount.r + 1 %}
+        {% endfor %}
+      </table>
+        {% endif %}
+        </table>
+        <a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addticket') }}"><i class="fas fa-address-card"></i> Δημιουργεία Συμβάντος</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
