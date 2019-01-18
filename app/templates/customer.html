@@ -12,16 +12,16 @@
           {{ seekCustForm.csrf_token }}
           <div class="row">
             <div class="col-lg form-group"><label for="mobilePhone" class="control-label">{{ seekCustForm.mobilePhone.label }}</label>
-              <input type="text" class="form-control frmRounded" name="mobilePhone" id="mobilePhone" placeholder="Αριθμός Κινητού">
+              {{ seekCustForm.mobilePhone(class_='form-control shadow frmRounded', placeholder='Αριθμός Κινητού Πελάτη') }}
             </div>
             <div class="col-lg form-group"><label for="lastname" class="control-label">{{ seekCustForm.lastName.label }}</label>
-              <input type="text" class="form-control frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+              {{ seekCustForm.lastName(class_='form-control shadow frmRounded', placeholder='Επίθετο Πελάτη') }}              
             </div>
           </div>
           <br />
           <div class="row">
             <div class="col-lg">
-              <input type="submit" class="btn btn-dark btn-href" value="Αναζήτηση" name="submit">
+              <input type="submit" class="btn box-shadow--4dp btn-dark btn-href" value="Αναζήτηση" name="submit">
             </div>
           </div>
           <br />
@@ -68,7 +68,7 @@
         {% endfor %}
         {% endif %}
         </table>
-        <a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addcustomer') }}"><i class="fas fa-address-card"></i> Προσθήκη Πελάτη</a>
+        <a class="btn box-shadow--4dp btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addcustomer') }}"><i class="fas fa-address-card"></i> Προσθήκη Πελάτη</a>
       </div>
     </div>
   </div>

@@ -1,3 +1,6 @@
+body {
+  background-color: #f7f8f9;
+}
 .rounded {
      border-radius:0.4rem!important;
  }
@@ -25,4 +28,13 @@
   position: absolute;
   margin-left: 8px;
   top:7px;
+}
+.box-shadow--4dp {
+    box-shadow: 0 4px 5px 0 #6f6f6f;
+}
+.box-shadow--4dp:hover {
+    box-shadow: 0 4px 5px 0 #4D4B4B;
+}
+h5 {
+  text-shadow: 2px 2px 4px #6f6f6f;
 }

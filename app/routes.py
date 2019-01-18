@@ -3,23 +3,7 @@ from app import app
 from app import db
 from app.models import Incident, Customer, Category
 from app.forms import CustomerForm, TicketForm, SeekCustomerForm, SeekTicketForm
-
-def MakeQuery(**kwargs):
-    queryStr = db.session.query(*Incident.__table__.columns, *Customer.__table__.columns, *Category.__table__.columns).filter(Incident.customer_id == Customer.id).filter(Incident.category_id == Category.id)
-    for j, k in kwargs.items():
-        varValue = k.split('|')
-        if varValue[0] != '':
-            if varValue[2] == 'Incident':
-                if varValue[1] == 'eq':
-                    queryStr = queryStr.filter((getattr(Incident, j)) == varValue[0])
-                if varValue[1] == 'like':
-                    queryStr = queryStr.filter((getattr(Incident, j)).like('%'+varValue[0]+'%'))
-            elif varValue[2] == 'Customer':
-                if varValue[1] == 'eq':
-                    queryStr = queryStr.filter((getattr(Customer, j)) == varValue[0])
-                if varValue[1] == 'like':
-                    queryStr = queryStr.filter((getattr(Customer, j)).like('%'+varValue[0]+'%'))
-    return queryStr
+from app.myfuncs import MakeQuery, MakeQueryAll
 
 @app.route('/')
 @app.route('/home')
@@ -34,6 +18,7 @@ def EditTicket(id):
 @app.route('/customer', methods=['GET', 'POST'])
 def customer():
     noResult = ''
+    seekQuery = Customer.query.all()
     seekCustForm = SeekCustomerForm()
     if seekCustForm.validate_on_submit():
         seekName = seekCustForm.lastName.data
@@ -47,7 +32,7 @@ def customer():
         if not seekQuery:
             noResult='Δεν Βρέθηκαν Αποτελέσματα'
         return render_template('customer.html', seekCustForm=seekCustForm, seekQuery=seekQuery, noResult=noResult)
-    return render_template('customer.html', seekCustForm=seekCustForm)
+    return render_template('customer.html', seekCustForm=seekCustForm, seekQuery=seekQuery)
 
 @app.route('/addcustomer', methods=['GET', 'POST'])
 def addcustomer():
@@ -65,6 +50,7 @@ def addcustomer():
 @app.route('/ticket', methods=['GET', 'POST'])
 def ticket():
     seekTicketForm = SeekTicketForm()
+    seekQueryAll = MakeQueryAll()
     noResult = ''
     if seekTicketForm.validate_on_submit():
         seekTitle = seekTicketForm.ticketTitle.data
@@ -83,9 +69,10 @@ def ticket():
         if seekQuery.count() == 0:
             noResult = 'Δεν Βρέθηκαν Αποτελέσματα'
         return render_template('ticket.html', seekTicketForm=seekTicketForm, seekQuery=seekQuery, noResult=noResult)
-    return render_template('ticket.html', seekTicketForm=seekTicketForm, noResult=noResult)
+    return render_template('ticket.html', seekTicketForm=seekTicketForm, noResult=noResult, seekQuery=seekQueryAll)
 
 @app.route('/addticket', methods=['GET', 'POST'])
 def addticket():
     ticketForm = TicketForm()
-    return render_template('ticketfrm.html', ticketForm=ticketForm)
+    seekCustForm = SeekCustomerForm()
+    return render_template('ticketfrm.html', ticketForm=ticketForm, seekCustForm=seekCustForm)

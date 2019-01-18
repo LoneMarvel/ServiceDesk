@@ -7,32 +7,30 @@
   <div class="col-2"></div>
   <div class="col-8">
     <div class="card shadow rounded">
-      <div class="card-body"><h5 class="card-title"><strong>Φόρμα Αναζήτησης Συμβάντος</strong></h5>
+      <div class="card-body"><h5><strong>Φόρμα Αναζήτησης Συμβάντος</strong></h5>
         <form method="POST" role="form">
           {{ seekTicketForm.csrf_token }}
           <div class="row">
             <div class="col-lg form-group"><label for="ticketTitle" class="control-label">{{ seekTicketForm.ticketTitle.label }}</label>
-              <input type="text" class="form-control form-control-sm frmRounded" name="ticketTitle" id="ticketTitle" placeholder="Τίτλος Συμβάτος">
+              <input type="text" class="form-control shadow form-control-sm frmRounded" name="ticketTitle" id="ticketTitle" placeholder="Τίτλος Συμβάτος">
             </div>
             <div class="col-lg form-group"><label for="serviceTag" class="control-label">{{ seekTicketForm.serviceTag.label }}</label>
-              <input type="text" class="form-control form-control-sm frmRounded" name="serviceTag" id="serviceTag" placeholder="Service Tag">
+              <input type="text" class="form-control shadow form-control-sm frmRounded" name="serviceTag" id="serviceTag" placeholder="Service Tag Μηχανήματος">
             </div>
             <div class="col-lg form-group"><label for="ticketTitle" class="control-label">{{ seekTicketForm.ticketCat.label }}</label>
-              {{ seekTicketForm.ticketCat(class_='form-control form-control-sm frmRounded') }}
+              {{ seekTicketForm.ticketCat(class_='form-control shadow form-control-sm frmRounded') }}
             </div>
           </div>
           <div class="row">
             <div class="col-lg form-group"><label for="mobilePhone" class="control-label">{{ seekTicketForm.mobilePhone.label }}</label>
-              <input type="text" class="form-control form-control-sm frmRounded" name="mobilePhone" id="mobilePhone" placeholder="Αριθμός Κινητού">
+              <input type="text" class="form-control shadow form-control-sm frmRounded" name="mobilePhone" id="mobilePhone" placeholder="Αριθμός Κινητού Πελάτη">
             </div>
             <div class="col-lg form-group"><label for="lastname" class="control-label">{{ seekTicketForm.lastName.label }}</label>
-              <input type="text" class="form-control form-control-sm frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+              <input type="text" class="form-control shadow form-control-sm frmRounded" name="lastName" id="lastName" placeholder="Επίθετο Πελάτη">
             </div>
           </div>
           <div class="row">
-            <div class="col-lg">
-              <input type="submit" class="btn btn-dark btn-href" value="Αναζήτηση" name="submit">
-            </div>
+            <div class="col-lg"><input type="submit" class="btn box-shadow--4dp btn-dark btn-href" value="Αναζήτηση" name="submit"></div>
           </div>
           <br />
         </form>
@@ -68,14 +66,14 @@
             <td>{{ item.lastname }}, {{ item.firstname }}</td>
             <td>{{ item.cat_name }}</td>
             <td>{{ item.mobile }}</td>
-            <td><a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Επεξεργασία</a></td>
+            <td><a class="btn box-shadow--4dp btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item[0]) }}"><i class="fas fa-edit"></i> Επεξεργασία</a></td>
           </tr>
           {% set rowCount.r = rowCount.r + 1 %}
         {% endfor %}
       </table>
         {% endif %}
         </table>
-        <a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addticket') }}"><i class="fas fa-address-card"></i> Δημιουργεία Συμβάντος</a>
+        <a class="btn box-shadow--4dp btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('addticket') }}"><i class="fas fa-address-card"></i> Δημιουργεία Συμβάντος</a>
       </div>
     </div>
   </div>

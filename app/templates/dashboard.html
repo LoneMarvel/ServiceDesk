@@ -9,15 +9,15 @@
     <div class="card shadow rounded">
       <div class="card-body"><h5 class="card-title"><strong>Ανοιχτά Συμβάντα</strong></h5>
     <!-- Incindents List Goes Here -->
-        <table class="table table-striped">
+        <table class="table table-sm table-hover table-striped">
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Incident Title</th>
-              <th scope="col">Category</th>
-              <th scope="col">Customer</th>
-              <th scope="col">Date</th>
-              <th scope="col">Action</th>
+              <th scope="col">Τίτλος Συμβάντος</th>
+              <th scope="col">Κατηγορία</th>
+              <th scope="col">Πελάτης</th>
+              <th scope="col">Ημερ/νία</th>
+              <th scope="col">Ενέργεια</th>
             </tr>
           </thead>
           <tbody>
@@ -28,7 +28,7 @@
                 <td>{{ item.category.cat_name }}</td>
                 <td>{{ item.customers[0].lastname }}, {{ item.customers[0].firstname }}</td>
                 <td>{{ item.start_date.strftime('%d/%m/%Y-%H:%M') }}</td>
-                <td><a class="btn btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Edit</a></td>
+                <td><a class="btn box-shadow--4dp btn-sm btn-outline btn-dark btn-href" role="button" href="{{ url_for('EditTicket', id=item.id) }}"><i class="fas fa-edit"></i> Επεξεργασία</a></td>
               </tr>
             {% endfor %}
           </tbody>

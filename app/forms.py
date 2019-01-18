@@ -4,7 +4,6 @@ from flask_wtf import FlaskForm
 from flask import Flask, render_template, flash, request
 from wtforms import StringField, TextAreaField, SelectField, SubmitField
 from wtforms.validators import DataRequired, Email
-from wtforms_sqlalchemy.fields import QuerySelectField
 
 class CustomerForm(FlaskForm):
     firstName = StringField('Ονομα: ', validators=[DataRequired('First name Required')])
@@ -16,13 +15,24 @@ class CustomerForm(FlaskForm):
     faxPhone = StringField('FAX: ')
     email = StringField('Email: ', validators=[DataRequired('Email Required'), Email('Email Is Wrong')])
     details = TextAreaField('Επιπρόσθετα: ')
-    submit = SubmitField('Αποθήκευση')
 
 class SeekCustomerForm(FlaskForm):
     lastName = StringField('Επίθετο: ')
-    mobilePhone = StringField('Κινητό: ')    
+    mobilePhone = StringField('Κινητό: ')
 
 class TicketForm(FlaskForm):
     ticketTitle = StringField('Τίτλος', validators=[DataRequired('Title Field Must Not Be Null')])
     ticketDescr = TextAreaField('Περιγραφή')
-    ticketCat = Category.CategoryList()
+    ticketCat = SelectField('Κατηγορία', choices=[(category.id,category.cat_name) for category in Category.query.all()], coerce=int)
+    serviceTag = StringField('Service Tag')
+    tags = StringField('Tags ')
+
+def listCategories():
+    return Category.query
+
+class SeekTicketForm(FlaskForm):
+    ticketTitle = StringField('Τίτλος')
+    ticketCat = SelectField('Κατηγορία', choices=[(category.id,category.cat_name) for category in Category.query.all()], coerce=int)
+    serviceTag = StringField('Service Tag')
+    lastName = StringField('Επίθετο: ')
+    mobilePhone = StringField('Κινητό: ')

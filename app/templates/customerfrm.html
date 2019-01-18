@@ -11,13 +11,13 @@
           {{ custForm.csrf_token }}
           <div class="row">
             <div class="col-lg form-group required"><label for="firstname" class="control-label">{{ custForm.firstName.label }}</label>
-              <input type="text" class="form-control frmRounded" name="firstName" id="firstName" placeholder="Ονομα">
+              <input type="text" class="form-control shadow frmRounded" name="firstName" id="firstName" placeholder="Ονομα Πελάτη">
                 {% for error in custForm.firstName.errors %}
                   <div class="alert alert-warning" role="alert">{{ error }}</div>
                 {% endfor %}
             </div>
             <div class="col-lg form-group required"><label for="lastname" class="control-label">{{ custForm.lastName.label }}</label>
-              <input type="text" class="form-control frmRounded" name="lastName" id="lastName" placeholder="Επίθετο">
+              <input type="text" class="form-control shadow frmRounded" name="lastName" id="lastName" placeholder="Επίθετο Πελάτη">
               {% for error in custForm.lastName.errors %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
               {% endfor %}
@@ -25,15 +25,15 @@
           </div>
           <div class="row">
             <div class="col"><label for="address">{{ custForm.address.label }}</label>
-              <input type="text" class="form-control frmRounded" name="address" id="address" placeholder="Διεύθυνση">
+              <input type="text" class="form-control shadow frmRounded" name="address" id="address" placeholder="Διεύθυνση Κατοικίας/Εργασίας Πελάτη">
             </div>
           </div>
           <div class="row">
             <div class="col"><label for="phone">{{ custForm.phone.label }}</label>
-              <input type="text" class="form-control frmRounded" name="phone" id="phone" placeholder="Τηλέφωνο">
+              <input type="text" class="form-control shadow frmRounded" name="phone" id="phone" placeholder="Τηλέφωνο">
             </div>
             <div class="col form-group required"><label for="mobilePhone" class="control-label">{{ custForm.mobilePhone.label }}</label>
-              <input type="text" class="form-control frmRounded" id="name" placeholder="Κινητό">
+              <input type="text" class="form-control shadow frmRounded" id="mobilePhone" name="mobilePhone" placeholder="Αριθμός Κινητού Πελάτη">
               {% for error in custForm.mobilePhone.errors %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
               {% endfor %}
@@ -41,15 +41,15 @@
           </div>
           <div class="row">
             <div class="col"><label for="workPhone">{{ custForm.workPhone.label }}</label>
-              <input type="text" class="form-control frmRounded" name="workPhone" id="workPhone" placeholder="Τηλέφωνο Εργασίας">
+              <input type="text" class="form-control shadow frmRounded" name="workPhone" id="workPhone" placeholder="Τηλέφωνο Εργασίας">
             </div>
             <div class="col"><label for="faxPhone">{{ custForm.faxPhone.label }}</label>
-              <input type="text" class="form-control frmRounded" name="faxPhone" id="faxPhone" placeholder="FAX">
+              <input type="text" class="form-control shadow frmRounded" name="faxPhone" id="faxPhone" placeholder="FAX">
             </div>
           </div>
           <div class="row">
             <div class="col-lg form-group required"><label for="email" class="control-label">{{ custForm.email.label }}</label>
-              <input type="text" class="form-control frmRounded" name="email" id="email" placeholder="Email">
+              <input type="text" class="form-control shadow frmRounded" name="email" id="email" placeholder="Email Πελάτη">
               {% for error in custForm.email.errors %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
               {% endfor %}
@@ -57,7 +57,7 @@
           </div>
           <div class="row">
             <div class="col-lg"><label for="details">{{ custForm.details.label }}</label>
-              <textarea class="form-control frmRounded" name="details" id="details"></textarea>
+              <textarea class="form-control shadow frmRounded" name="details" id="details"></textarea>
             </div>
           </div>
           <br />

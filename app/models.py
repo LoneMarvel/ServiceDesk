@@ -11,6 +11,7 @@ class Incident(db.Model):
     description = db.Column(db.String(1255))
     customer_id = db.Column(db.Integer)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    serviceTag = db.Column(db.String(120))
     tags = db.Column(db.Text())
     start_date = db.Column(db.DateTime, nullable=False, default=datetime.now)
     customers = relationship('Customer',secondary='transactions')
@@ -41,9 +42,10 @@ class Customer(db.Model):
     details = db.Column(db.Text)
     incidents = relationship('Incident',secondary='transactions')
 
-    def __init__(self,firstname,lastname,phone,mobile,workphone,fax,email,details):
+    def __init__(self,firstname,lastname,address,phone,mobile,workphone,fax,email,details):
         self.firstname = firstname
         self.lastname = lastname
+        self.address = address
         self.phone = phone
         self.mobile = mobile
         self.workphone = workphone
@@ -52,7 +54,7 @@ class Customer(db.Model):
         self.details = details
 
     def __repr__(self):
-        return f'Customer -> {self.mobile}'
+        return f'{self.lastname}, {self.firstname}'
 
 class Category(db.Model):
     __tablename__ = 'categories'
